@@ -16,6 +16,7 @@ class AlarmReceiver : BroadcastReceiver() {
         var notifId = intent?.getIntExtra("notifID", 0)
 
         var i = Intent(context, Home::class.java)
+        alarmManager.cancel(pendingIntent)
         var pendingIntent = PendingIntent.getActivity(context, 0 , i, 0)
         var builder = NotificationCompat.Builder(context!!,"amar")
         builder.setSmallIcon(R.drawable.timex)
