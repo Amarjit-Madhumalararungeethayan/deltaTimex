@@ -21,23 +21,26 @@ public class Fore : Service() {
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
-        var seq = msg
-
         var cal : Calendar = Calendar.getInstance()
 
-        cal[Calendar.HOUR_OF_DAY] = temp1
-            cal[Calendar.MINUTE] = temp2
+        if((temp1 != 0)&&(temp2 != 0)){
+                cal[Calendar.HOUR_OF_DAY] = temp1
+                cal[Calendar.MINUTE] = temp2
 
-        cal[Calendar.SECOND] = 0
+            var seq = msg
 
-        Log.d("😑", "${temp1} : ${temp2}")
+            cal[Calendar.SECOND] = 0
 
-        val intent = Intent(this, AlarmReceiver::class.java)
-        intent.putExtra("msga",seq)
+            Log.d("😑", "${temp1} : ${temp2}")
 
-        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+            val intent = Intent(this, AlarmReceiver::class.java)
+            intent.putExtra("msg", seq)
 
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,cal.timeInMillis, pendingIntent)
+            pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,cal.timeInMillis, pendingIntent)
+            }
+
 
 
         return START_STICKY

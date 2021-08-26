@@ -39,6 +39,7 @@ class Home : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.reset.isVisible = false
 
         createNotif()
@@ -118,8 +119,10 @@ class Home : AppCompatActivity() {
 
 **/             stopService(Intent(this, Fore::class.java))
 
-                temp1 = binding.time.hour
-                temp2 = binding.time.minute
+                if((binding.time.hour != 0)&&(binding.time.minute != 0)) {
+                    temp1 = binding.time.hour
+                    temp2 = binding.time.minute
+                }
 
                 startService(Intent(this, Fore::class.java))
 
