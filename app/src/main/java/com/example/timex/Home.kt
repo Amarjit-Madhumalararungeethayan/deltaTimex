@@ -14,14 +14,17 @@ import com.example.timex.databinding.ActivityHomeBinding
 import java.util.*
 
 lateinit var msg : String
-
 lateinit var alarmManager: AlarmManager
 lateinit var pendingIntent: PendingIntent
+lateinit var calendar : Calendar
+
+var temp1 = 0
+var temp2 = 0
 
 class Home : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
 
-    private lateinit var calendar : Calendar
+
     private lateinit var calendar2 : Calendar
 
 
@@ -91,12 +94,20 @@ class Home : AppCompatActivity() {
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                     calendar2.getTimeInMillis(),
-                    900000, // Repeat every 15 mins
+                    900000, /* Repeat every 10 seconds */
                     pendingIntent)
+
+                //stopService(Intent(this, Fore::class.java))
+
+                //intent.putExtra("msg", binding.event.text)
+                //intent.putExtra("time", calendar2)
+
+                //startService(Intent(this, Fore::class.java))
 
                 Toast.makeText(this, "Reminder Set", Toast.LENGTH_SHORT).show()
 
             }else{
+                /**
                 alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
                 val intent = Intent(this, AlarmReceiver::class.java)
@@ -104,6 +115,13 @@ class Home : AppCompatActivity() {
                 pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
 
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendar.timeInMillis, pendingIntent)
+
+**/             stopService(Intent(this, Fore::class.java))
+
+                temp1 = binding.time.hour
+                temp2 = binding.time.minute
+
+                startService(Intent(this, Fore::class.java))
 
                 Toast.makeText(this, "Reminder Set", Toast.LENGTH_SHORT).show()
 

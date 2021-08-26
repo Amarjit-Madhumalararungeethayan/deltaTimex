@@ -23,6 +23,7 @@
         </activity>
 
         <receiver android:name=".AlarmReceiver" />
+        <service android:name=".Fore"/>
     </application>
 
 
