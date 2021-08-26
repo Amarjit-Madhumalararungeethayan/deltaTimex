@@ -21,6 +21,8 @@ public class Fore : Service() {
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
+        var seq = msg
+
         var cal : Calendar = Calendar.getInstance()
 
         cal[Calendar.HOUR_OF_DAY] = temp1
@@ -31,6 +33,7 @@ public class Fore : Service() {
         Log.d("😑", "${temp1} : ${temp2}")
 
         val intent = Intent(this, AlarmReceiver::class.java)
+        intent.putExtra("msga",seq)
 
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
 

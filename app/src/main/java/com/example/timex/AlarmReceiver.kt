@@ -13,15 +13,18 @@ import androidx.core.app.NotificationManagerCompat
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
 
+        var rrr = "abc"
         var notifId = intent?.getIntExtra("notifID", 0)
-
+        if (intent != null) {
+            rrr = intent.getStringExtra("msga").toString()
+        }
         var i = Intent(context, Home::class.java)
         //alarmManager.cancel(pendingIntent)
         var pendingIntent = PendingIntent.getActivity(context, 0 , i, 0)
         var builder = NotificationCompat.Builder(context!!,"amar")
         builder.setSmallIcon(R.drawable.timex)
             .setContentTitle("Event !!!")
-            .setContentText("You have a reminder")
+            .setContentText(rrr)
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
